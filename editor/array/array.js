@@ -1,9 +1,9 @@
-angular.module('betweenDemoModule', [])
+angular.module('arrayDemoModule', [])
 
-    .directive('betweenDemo', function (clr) {
+    .directive('arrayDemo', function (clr,$timeout) {
         return {
             restrict:'C',
-            templateUrl:'editor/betweenDemo/between.html',
+            templateUrl:'editor/array/array.html',
             replace: true,
 	        link: function(scope)	{
 
@@ -12,6 +12,7 @@ angular.module('betweenDemoModule', [])
                 scope.c2 = "rgb(0,0,255)";
                 scope.o1 = 0;
                 scope.o2 = 1;
+                scope.len = 5;
 
             }
         }

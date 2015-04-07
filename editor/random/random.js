@@ -3,7 +3,7 @@ angular.module('randomDemoModule', [])
     .directive('randomDemo', function (clr) {
         return {
             restrict:'C',
-            templateUrl:'editor/randomDemo/random.html',
+            templateUrl:'editor/random/random.html',
             replace: true,
 	        link: function(scope)	{
 

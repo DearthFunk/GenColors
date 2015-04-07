@@ -3,7 +3,7 @@ angular.module('convertDemoModule', [])
     .directive('convertDemo', function (clr) {
         return {
             restrict:'C',
-            templateUrl:'editor/convertDemo/convert.html',
+            templateUrl:'editor/convert/convert.html',
             replace: true,
 	        link: function(scope)	{
 
