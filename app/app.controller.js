@@ -8,20 +8,11 @@ angular
             'convertDemoModule',
             'randomDemoModule'
 	])
-	.directive('body', body);
+	.controller('genColorsController', genColorsController);
 
-	function body(){
-		var directive = {
-			restrict: 'E',
-			controller: bodyController,
-			bindToController: true
-		}
-		return directive
-	}
+	genColorsController.$inject = ['$scope', '$window'];
 
-	bodyController.$inject = ['$scope', '$window'];
-
-	function bodyController($scope, $window)	{
+	function genColorsController($scope, $window) {
 
 		$scope.sliceWidth = 0;
 		$scope.arrayBackground = false;

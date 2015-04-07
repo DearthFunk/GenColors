@@ -34,7 +34,7 @@
         <link rel="stylesheet" href="css/main.css">
         <script type="text/javascript" src="js/clrService.js"></script>
         <script type="text/javascript" src="js/eventService.js"></script>
-        <script type="text/javascript" src="js/controller.js"></script>
+        <script type="text/javascript" src="app/app.controller.js"></script>
 
     <!--EDITOR--------------------------------------------------------------------------------------------------------->
         <script type="text/javascript" src="editor/editor.js"></script>
@@ -50,7 +50,7 @@
 
 </head>
 
-<body data-ng-style="{backgroundColor: getBackground()}">
+<body data-ng-controller="genColorsController" data-ng-style="{backgroundColor: getBackground()}">
     <div class="editor"></div>
     <div class="arrayBackground" data-ng-if="arrayBackground">
         <div class="slice" data-ng-repeat="item in background.color track by $index" data-ng-style="{backgroundColor:item, width:sliceWidth+'px'}"></div>
