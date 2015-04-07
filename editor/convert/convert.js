@@ -8,7 +8,7 @@ angular.module('convertDemoModule', [])
 	        link: function(scope)	{
 
 		        scope.clr = clr;
-                scope.toConvert = "#FF0000";
+                scope.toConvert = '#FF0000';
                 scope.opacity = 1;
 
 

@@ -10,7 +10,7 @@ angular.module('editorModule', [])
                 var windowPadding = 20;
 	            var boundingRect = element[0].getBoundingClientRect();
                 var startX, startY, moving, windowSize,right,bottom;
-                var clipBoard = new ZeroClipboard( document.getElementById("copyButton") );
+                var clipBoard = new ZeroClipboard( document.getElementById('copyButton') );
 
 	            scope.activeControls = -1;
 	            scope.left = windowPadding;
@@ -19,16 +19,16 @@ angular.module('editorModule', [])
 	            scope.minimized = true;
 
                 scope.data = [
-                    {name:"RANDOM"},
-                    {name:"CONVERT"},
-                    {name:"BETWEEN",data:{
+                    {name:'RANDOM'},
+                    {name:'CONVERT'},
+                    {name:'BETWEEN',data:{
                         hex:{ c1: clr.random.rgb(), c2: clr.random.rgb(), val:''},
                         rgb:{ c1: clr.random.hex(), c2: clr.random.hex(), val:''},
                         hsl:{ c1: clr.random.rgba(), c2: clr.random.hsl(), val:''},
                         rgba:{c1: clr.random.rgb(), c2: clr.random.hex(), o1: 0, o2: 1, val:''},
                         hsla:{c1: clr.random.rgba(), c2:clr.random.hex(), o1: 0, o2: 1, val:''}}
                     },
-                    {name:"ARRAY",data:{
+                    {name:'ARRAY',data:{
                         hex:{ c1: clr.random.rgb(), c2: clr.random.rgb(), len: 5, val:''},
                         rgb:{ c1: clr.random.hex(), c2: clr.random.hex(), len: 5, val:''},
                         hsl:{ c1: clr.random.rgba(), c2: clr.random.hsl(), len: 5, val:''},
@@ -74,7 +74,7 @@ angular.module('editorModule', [])
                 };
 
                 scope.$on('mouseUpEvent', function() {
-                    document.body.style.cursor = "auto";
+                    document.body.style.cursor = 'auto';
                     moving = false;
                 });
 
