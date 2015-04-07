@@ -1,19 +1,26 @@
-angular.module('arrayDemoModule', [])
+angular
+	.module('editorModule')
+    .directive('arrayDemo', arrayDemo);
 
-    .directive('arrayDemo', function (clr,$timeout) {
-        return {
-            restrict:'C',
-            templateUrl:'editor/array/array.html',
-            replace: true,
-	        link: function(scope)	{
+	function arrayDemo() {
+		var directive = {
+			restrict: 'A',
+			scope: {},
+			replace: true,
+			templateUrl:'editor/array/array.html',
+			controller: arrayDemoController,
+			bindToController: true
+		};
+		return directive
+	}
 
-                scope.clr = clr;
-                scope.c1 = '#FF0000';
-                scope.c2 = 'rgb(0,0,255)';
-                scope.o1 = 0;
-                scope.o2 = 1;
-                scope.len = 5;
+	arrayDemoController.$inject = ['$scope', 'clr'];
 
-            }
-        }
-    });
+	function arrayDemoController($scope, clr) {
+        $scope.clr = clr;
+        $scope.c1 = '#FF0000';
+        $scope.c2 = 'rgb(0,0,255)';
+        $scope.o1 = 0;
+        $scope.o2 = 1;
+        $scope.len = 5;
+    }

@@ -1,17 +1,23 @@
-angular.module('convertDemoModule', [])
+angular
+	.module('editorModule')
+    .directive('convertDemo', convertDemo);
 
-    .directive('convertDemo', function (clr) {
-        return {
-            restrict:'C',
-            templateUrl:'editor/convert/convert.html',
-            replace: true,
-	        link: function(scope)	{
+	function convertDemo() {
+		var directive = {
+			restrict: 'A',
+			scope: {},
+			replace: true,
+			templateUrl:'editor/convert/convert.html',
+			controller: convertController,
+			bindToController: true
+		};
+		return directive
+	}
 
-		        scope.clr = clr;
-                scope.toConvert = '#FF0000';
-                scope.opacity = 1;
+	convertController.$inject = ['$scope', 'clr'];
 
-
-            }
-        }
-    });
+	function convertController($scope, clr) {
+        $scope.clr = clr;
+        $scope.toConvert = '#FF0000';
+        $scope.opacity = 1;
+    }

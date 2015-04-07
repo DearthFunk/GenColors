@@ -1,18 +1,25 @@
-angular.module('betweenDemoModule', [])
+angular
+	.module('editorModule')
+    .directive('betweenDemo', betweenDemo);
 
-    .directive('betweenDemo', function (clr) {
-        return {
-            restrict:'C',
-            templateUrl:'editor/between/between.html',
-            replace: true,
-	        link: function(scope)	{
+	function betweenDemo() {
+		var directive = {
+			restrict: 'A',
+			scope: {},
+			replace: true,
+			templateUrl:'editor/between/between.html',
+			controller: betweenController,
+			bindToController: true
+		};
+		return directive
+	}
 
-                scope.clr = clr;
-                scope.c1 = '#FF0000';
-                scope.c2 = 'rgb(0,0,255)';
-                scope.o1 = 0;
-                scope.o2 = 1;
+	betweenController.$inject = ['$scope', 'clr'];
 
-            }
-        }
-    });
+	function betweenController($scope, clr) {
+        $scope.clr = clr;
+        $scope.c1 = '#FF0000';
+        $scope.c2 = 'rgb(0,0,255)';
+        $scope.o1 = 0;
+        $scope.o2 = 1;
+    }

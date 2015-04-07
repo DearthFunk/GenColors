@@ -1,7 +1,6 @@
-<div class='convertContainer">
+<div class="convertContainer">
     <div class="left">
         <input type="text" data-ng-model="toConvert"><input type="text" data-ng-model="opacity" class="opacity">
     </div>
-
     <button data-ng-repeat="(key,val) in clr.convert" data-ng-if="key != 'numberToHex' && key != 'hexToNumber'" data-ng-click="background.color = val(toConvert,opacity)">{{key}}</button>
 </div>

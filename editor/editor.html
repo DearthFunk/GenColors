@@ -13,10 +13,11 @@
     <div class="editorBody" data-ng-show="minimized">
         <div class="section" data-ng-repeat="item in data track by $index">
             <div class="title" data-ng-class="{active:$index==activeControls}" data-ng-click="selectControls($index)">{{item.name}}</div>
-            <div data-ng-if="activeControls == $index && $index == 0" class="content randomDemo"></div>
-            <div data-ng-if="activeControls == $index && $index == 1" class="content convertDemo"></div>
-            <div data-ng-if="activeControls == $index && $index == 2" class="content betweenDemo" data-background="background" data-data="item.data"></div>
-            <div data-ng-if="activeControls == $index && $index == 3" class="content arrayDemo"   data-background="background" data-data="item.data"></div>
+            <div data-ng-if="activeControls == $index && $index == 0" class="content" random-demo></div>
+            <div data-ng-if="activeControls == $index && $index == 1" class="content" convert-demo></div>
+            <div data-ng-if="activeControls == $index && $index == 2" class="content" between-demo data-background="background" data-data="item.data"></div>
+            <div data-ng-if="activeControls == $index && $index == 3" class="content" array-demo   data-background="background" data-data="item.data"></div>
+
         </div>
     </div>
 

@@ -1,15 +1,22 @@
-angular.module('randomDemoModule', [])
+angular
+	.module('editorModule')
+    .directive('randomDemo', randomDemo);
 
-    .directive('randomDemo', function (clr) {
-        return {
-            restrict:'C',
-            templateUrl:'editor/random/random.html',
-            replace: true,
-	        link: function(scope)	{
+	function randomDemo() {
+		var directive = {
+			restrict: 'A',
+			scope: {},
+			replace: true,
+			templateUrl:'editor/random/random.html',
+			controller: randomController,
+			bindToController: true
+		};
+		return directive
+	}
 
-                scope.clr = clr;
-                scope.grey = false;
+	randomController.$inject = ['$scope', 'clr'];
 
-            }
-        }
-    });
+	function randomController($scope, clr) {
+		$scope.clr = clr;
+		$scope.grey = false;
+    }

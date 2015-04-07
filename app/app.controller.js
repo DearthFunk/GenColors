@@ -2,11 +2,7 @@ angular
 	.module('genColors', [
         'clrServiceModule',
         'eventServiceModule',
-	    'editorModule',
-            'arrayDemoModule',
-            'betweenDemoModule',
-            'convertDemoModule',
-            'randomDemoModule'
+	    'editorModule'
 	])
 	.controller('genColorsController', genColorsController);
 
