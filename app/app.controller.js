@@ -1,7 +1,6 @@
 angular
 	.module('genColors', [
         'clrServiceModule',
-        'eventServiceModule',
 	    'editorModule'
 	])
 	.controller('genColorsController', genColorsController);
