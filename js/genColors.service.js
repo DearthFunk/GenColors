@@ -52,23 +52,24 @@ angular
 
 		function getColorType(color) {
 			var c = color.slice(0,4).toLowerCase();
-			return (color[0] == '#' ? 0 :
-				c == 'rgb(' ? 1 :
-					c == 'rgba' ? 2 :
-						c == 'hsl(' ? 3 :
-							c == 'hsla' ? 4 :
-								false
+			return (color[0] === '#' ? 0 :
+				c === 'rgb(' ? 1 :
+				c === 'rgba' ? 2 :
+				c === 'hsl(' ? 3 :
+				c === 'hsla' ? 4 :
+				false
 			)
 		}
-		function getValues(color,returnType,hslPercentage) {
+		function getValues(color, returnType, hslPercentage) {
 			color = color.toUpperCase();
 			var obj = {};
 			var returnVal, vals, keys;
 			var colorType = factory.get.colorType(color);
-			if (colorType == 0) {
+			if (colorType === 0) {
+				var arr = color.slice(1).match(/.{1,1}/g).slice(0,3);
 				vals = color.length < 7 ?
-					[color.substring(1,2)+color.substring(1,2),color.substring(2,3)+color.substring(2,3),color.substring(3,4)+color.substring(3,4)] :
-					[color.substring(1,3),color.substring(3,5),color.substring(5,7)];
+					[arr[0]+arr[0], arr[1]+arr[1], arr[2]+arr[2]] :
+					color.slice(1).match(/.{1,2}/g);
 				keys = ['r','g','b'];
 			}
 			else {
@@ -77,7 +78,7 @@ angular
 				vals.splice(0,1);
 			}
 			for (var i = 0; i < keys.length; i++) {
-				if (colorType == 0) {
+				if (colorType === 0) {
 					obj[keys[i]] = vals[i];
 				}
 				else if ( vals[i].indexOf('%') > -1) {
@@ -91,19 +92,18 @@ angular
 					vals[i] = Number(vals[i]);
 				}
 			}
-
 			switch(returnType) {
-				case 0: returnVal = color;break;
-				case 1: returnVal = vals;break;
+				case 0: returnVal = color; break;
+				case 1: returnVal = vals; break;
 				case 2:	returnVal = angular.copy(obj); break;
 				default: returnVal = color;
 			}
 			return returnVal
 		}
-		function getRandomNumber(from,to,decimals) {
-			return decimals != undefined ?
+		function getRandomNumber(from, to, decimals) {
+			return angular.isDefined(decimals) ?
 				Number((Math.random()*(Number(to)-Number(from))+Number(from)).toFixed(decimals)) :
-				Number(Math.random()*(to-from)+from,decimals)
+				Number(Math.random()*(to-from)+from)
 		}
 		function getRoundedNumber(value, decimals) {
 			var precision = decimals || 0;
@@ -132,10 +132,12 @@ angular
 		        v = m1;
 	        return numOrHex ? factory.convert.numberToHex(255 * v) : factory.get.roundedNumber(255 * v,0);
         }
-		function randomHex(type,greyScale){
+		function randomHex(type, greyScale) {
 			var returnVal;
 			if (greyScale) {
-				var hex = factory.get.randomNumber(0,15,0).toString(16).toUpperCase() + factory.get.randomNumber(0,15,0).toString(16).toUpperCase();
+				var hex =
+					factory.get.randomNumber(0,15,0).toString(16).toUpperCase() +
+					factory.get.randomNumber(0,15,0).toString(16).toUpperCase();
 				returnVal = '#' + hex+hex+hex;
 			}
 			else {
@@ -143,31 +145,30 @@ angular
 			}
 			return factory.get.values(returnVal,type);
 		}
-		function randomRgb(type,greyScale){
+		function randomRgb(type, greyScale) {
 			var r = factory.get.randomNumber(0,255,0);
 			var g = greyScale ? r : factory.get.randomNumber(0,255,0);
 			var b = greyScale ? r : factory.get.randomNumber(0,255,0);
 			return factory.get.values('rgb('+r+','+b+','+g+')',type);
 		}
-		function randomHsl(type,greyScale) {
+		function randomHsl(type, greyScale) {
 			var h = factory.get.randomNumber(0,240,0);
 			var s = greyScale ? '0%' : factory.get.randomNumber(0,100,0) + '%';
 			var l = factory.get.randomNumber(0,100,0) + '%';
 			return factory.get.values('HSL('+h+','+s+','+l+')',type);
 		}
-		function randomRgba(type,greyScale,opacity){
+		function randomRgba(type, greyScale, opacity) {
 			var r =  factory.get.randomNumber(0,255,0);
 			var g = greyScale ? r : factory.get.randomNumber(0,255,0);
 			var b = greyScale ? r : factory.get.randomNumber(0,255,0);
-			var a = opacity == undefined ? factory.get.randomNumber(0,1,4) : opacity;
+			var a = angular.isUndefined(opacity) ? factory.get.randomNumber(0,1,4) : opacity;
 			return factory.get.values('RGBA('+r+','+g+','+b+','+a+')',type);
 		}
-		function randomHsla(type,greyScale,opacity) {
-			var returnVal;
+		function randomHsla(type, greyScale, opacity) {
 			var h = factory.get.randomNumber(0,240,0);
 			var s = greyScale ? '0%' : factory.get.randomNumber(0,100,0) + '%';
 			var l = factory.get.randomNumber(0,100,0) + '%';
-			var a = opacity == undefined ? factory.get.randomNumber(0,1,4) : opacity;
+			var a = angular.isUndefined(opacity) ? factory.get.randomNumber(0,1,4) : opacity;
 			return factory.get.values('HSLA('+h+','+s+','+l+','+a+')',type);
 		}
 		function convertNumberToHex(x) {
@@ -182,11 +183,11 @@ angular
 			var returnVal;
 			var colorType = factory.get.colorType(color);
 			var vals = factory.get.values(color,1,true);
-			if (colorType == 0) {
-				if (color.length == 7) {
+			if (colorType === 0) {
+				if (color.length === 7) {
 					returnVal = color;
 				}
-				else if (color.length == 4) {
+				else if (color.length === 4) {
 					var tmp = color.split('');
 					returnVal = '#' + tmp[1] + tmp[1] + tmp[2] + tmp[2] + tmp[3] + tmp[3];
 				}
@@ -194,12 +195,12 @@ angular
 					returnVal = color;
 				}
 			}
-			else if (colorType == 1 || colorType == 2) {
+			else if (colorType === 1 || colorType === 2) {
 				returnVal =  '#' + factory.convert.numberToHex(vals[0]) + factory.convert.numberToHex(vals[1]) + factory.convert.numberToHex(vals[2]);
 			}
-			else if (colorType == 3 || colorType == 4) {
+			else if (colorType === 3 || colorType === 4) {
 				var m1, m2, hue;
-				if (vals[1] == 0) {vals[0] = vals[1] = vals[2] = (vals[2] * 255);}
+				if (vals[1] === 0) {vals[0] = vals[1] = vals[2] = (vals[2] * 255);}
 				else {
 					m2 = vals[2] <= 0.5 ? vals[2] * (vals[1] + 1) :vals[2] + vals[1] - vals[2] * vals[1];
 					m1 = vals[2] * 2 - m2;
@@ -221,21 +222,21 @@ angular
 			var colorType = factory.get.colorType(color);
 			var vals = factory.get.values(color,1,true);
 
-			if (colorType == 0) {
+			if (colorType === 0) {
 				returnVal = 'RGB('+
 				factory.convert.hexToNumber(vals[0]) + ','+
 				factory.convert.hexToNumber(vals[1]) + ','+
 				factory.convert.hexToNumber(vals[2]) + ')';
 			}
-			else if (colorType == 1) {
+			else if (colorType === 1) {
 				returnVal = color;
 			}
-			else if (colorType == 2) {
+			else if (colorType === 2) {
 				returnVal = 'RGB(' + vals[0] + ',' + vals[1] + ',' + vals[2] + ')';
 			}
-			else if (colorType == 3 || colorType == 4) {
+			else if (colorType === 3 || colorType === 4) {
 				var m1, m2, hue;
-				if (vals[1] == 0) {vals[0] = vals[1] = vals[2] = (vals[2] * 255);}
+				if (vals[1] === 0) {vals[0] = vals[1] = vals[2] = (vals[2] * 255);}
 				else {
 					m2 = vals[2] <= 0.5 ? vals[2] * (vals[1] + 1) :vals[2] + vals[1] - vals[2] * vals[1];
 					m1 = vals[2] * 2 - m2;
@@ -248,28 +249,28 @@ angular
 			}
 			return returnVal
 		}
-		function convertRgba(color,opacity) {
+		function convertRgba(color, opacity) {
 			color = color.toUpperCase();
 			var returnVal;
 			var colorType = factory.get.colorType(color);
 			var vals = factory.get.values(color,1,true);
-			var o = colorType == 2 || colorType == 4 ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
-			if (colorType == 0) {
+			var o = colorType === 2 || colorType === 4 ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
+			if (colorType === 0) {
 				returnVal = 'RGBA('+
 				factory.convert.hexToNumber(vals[0]) + ','+
 				factory.convert.hexToNumber(vals[1]) + ','+
 				factory.convert.hexToNumber(vals[2]) + ','+
 				o + ')';
 			}
-			else if (colorType == 1) {
+			else if (colorType === 1) {
 				returnVal = 'RGBA(' + vals[0] + ',' + vals[1] + ',' + vals[2] + ',' + o + ')';
 			}
-			else if (colorType == 2) {
+			else if (colorType === 2) {
 				returnVal = color;
 			}
-			else if (colorType == 3 || colorType == 4) {
+			else if (colorType === 3 || colorType === 4) {
 				var m1, m2, hue;
-				if (vals[1] == 0) {vals[0] = vals[1] = vals[2] = (vals[2] * 255);}
+				if (vals[1] === 0) {vals[0] = vals[1] = vals[2] = (vals[2] * 255);}
 				else {
 					m2 = vals[2] <= 0.5 ? vals[2] * (vals[1] + 1) :vals[2] + vals[1] - vals[2] * vals[1];
 					m1 = vals[2] * 2 - m2;
@@ -286,15 +287,14 @@ angular
 			var returnVal;
 			var colorType = factory.get.colorType(color);
 			var vals = factory.get.values(color,1,true);
-			if (colorType == 0 || colorType == 1 || colorType == 2) {
+			if ([0,1,2].indexOf(colorType) !== -1) {
 				var hexVals = factory.get.values(factory.convert.rgb(color),1);
-				var r = colorType == 0 ? hexVals[0] : vals[0];
-				var g = colorType == 0 ? hexVals[1] : vals[1];
-				var b = colorType == 0 ? hexVals[2] : vals[2];
-				r /= 255, g /= 255, b /= 255;
+				var r = (colorType === 0 ? hexVals[0] : vals[0])/255;
+				var g = (colorType === 0 ? hexVals[1] : vals[1])/255;
+				var b = (colorType === 0 ? hexVals[2] : vals[2])/255;
 				var max = Math.max(r, g, b), min = Math.min(r, g, b);
 				var h, s, l = (max + min) / 2;
-				if(max == min){
+				if(max === min){
 					h = s = 0; // achromatic
 				}else{
 					var d = max - min;
@@ -308,24 +308,23 @@ angular
 				}
 				returnVal = 'HSL('+Math.floor(h*360)+','+Math.floor(s*100)+'%,'+Math.floor(l*100)+'%)';
 			}
-			else if(colorType == 3) {returnVal = color.toUpperCase();}
-			else if(colorType == 4) {returnVal = 'HSL('+vals[0]+','+(vals[1]*100)+'%,'+(vals[2]*100)+'%)';}
+			else if(colorType === 3) {returnVal = color.toUpperCase();}
+			else if(colorType === 4) {returnVal = 'HSL('+vals[0]+','+(vals[1]*100)+'%,'+(vals[2]*100)+'%)';}
 			return returnVal
 		}
-		function convertHsla(color,opacity) {
+		function convertHsla(color, opacity) {
 			var returnVal;
 			var colorType = factory.get.colorType(color);
 			var vals = factory.get.values(color,1,true);
-			var o = colorType == 2 || colorType == 4 ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
-			if (colorType == 0 || colorType == 1 || colorType == 2) {
+			var o = colorType === 2 || colorType === 4 ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
+			if (colorType === 0 || colorType === 1 || colorType === 2) {
 				var hexVals = factory.get.values(factory.convert.rgb(color),1);
-				var r = colorType == 0 ? hexVals[0] : vals[0];
-				var g = colorType == 0 ? hexVals[1] : vals[1];
-				var b = colorType == 0 ? hexVals[2] : vals[2];
-				r /= 255, g /= 255, b /= 255;
+				var r = (colorType === 0 ? hexVals[0] : vals[0])/255;
+				var g = (colorType === 0 ? hexVals[1] : vals[1])/255;
+				var b = (colorType === 0 ? hexVals[2] : vals[2])/255;
 				var max = Math.max(r, g, b), min = Math.min(r, g, b);
 				var h, s, l = (max + min) / 2;
-				if(max == min){	h = s = 0; }// achromatic
+				if(max === min){	h = s = 0; }// achromatic
 				else{
 					var d = max - min;
 					s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
@@ -338,16 +337,16 @@ angular
 				}
 				returnVal = 'HSLA('+Math.floor(h*360)+','+Math.floor(s*100)+'%,'+Math.floor(l*100)+'%,'+o+')';
 			}
-			else if(colorType == 3) {returnVal = 'HSLA('+vals[0]+','+(vals[1]*100)+'%,'+(vals[2]*100)+'%,'+o+')';}
-			else if(colorType == 4) {returnVal = color.toUpperCase()}
+			else if(colorType === 3) {returnVal = 'HSLA('+vals[0]+','+(vals[1]*100)+'%,'+(vals[2]*100)+'%,'+o+')';}
+			else if(colorType === 4) {returnVal = color.toUpperCase()}
 			return returnVal
 		}
-		function betweenHex(c1,c2) {return factory.array.hex(c1,c2,3)[1]}
-		function betweenRgb(c1,c2) {return factory.array.rgb(c1,c2,3)[1]}
-		function betweenHsl(c1,c2) {return factory.array.hsl(c1,c2,3)[1]}
-		function betweenRgba(c1,c2,o1,o2) {return factory.array.rgba(c1,c2,3,o1,o2)[1]}
-		function betweenHsla(c1,c2,o1,o2) {return factory.array.hsla(c1,c2,3,o1,o2)[1]}
-		function arrayHex(c1,c2,len){
+		function betweenHex(c1, c2) {return factory.array.hex(c1, c2, 3)[1]}
+		function betweenRgb(c1, c2) {return factory.array.rgb(c1, c2, 3)[1]}
+		function betweenHsl(c1, c2) {return factory.array.hsl(c1, c2, 3)[1]}
+		function betweenRgba(c1, c2, o1, o2) {return factory.array.rgba(c1, c2, 3, o1, o2)[1]}
+		function betweenHsla(c1, c2, o1, o2) {return factory.array.hsla(c1, c2, 3, o1, o2)[1]}
+		function arrayHex(c1, c2, len) {
 			var steps = [];
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.hex(c1),factory.convert.hex(c2)]}
@@ -355,9 +354,9 @@ angular
 				var c1Vals = factory.get.values(factory.convert.rgb(c1),1);
 				var c2Vals = factory.get.values(factory.convert.rgb(c2),1);
 				for (var i = 0; i < c1Vals.length; i++) {
-					steps.push( c1Vals[i] == c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
+					steps.push( c1Vals[i] === c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 				}
-				for (var i = 0; i < len; i++) {
+				for (i = 0; i < len; i++) {
 					returnVal.push ( '#' +
 						factory.convert.numberToHex(Math.floor( steps[0] * i + c1Vals[0] )) +
 						factory.convert.numberToHex(Math.floor( steps[1] * i + c1Vals[1] )) +
@@ -367,7 +366,7 @@ angular
 			}
 			return returnVal
 		}
-		function arrayRgb(c1,c2,len){
+		function arrayRgb(c1, c2, len) {
 			var steps = [];
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.rgb(c1),factory.convert.rgb(c2)]}
@@ -375,9 +374,9 @@ angular
 				var c1Vals = factory.get.values(factory.convert.rgb(c1),1);
 				var c2Vals = factory.get.values(factory.convert.rgb(c2),1);
 				for (var i = 0; i < c1Vals.length; i++) {
-					steps.push( c1Vals[i] == c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
+					steps.push( c1Vals[i] === c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 				}
-				for (var i = 0; i < len; i++) {
+				for ( i = 0; i < len; i++) {
 					returnVal.push ( 'RGB(' +
 						Math.floor( steps[0] * i + c1Vals[0] ) + ',' +
 						Math.floor( steps[1] * i + c1Vals[1] ) + ',' +
@@ -387,7 +386,7 @@ angular
 			}
 			return returnVal
 		}
-		function arrayRgba(c1,c2,len,op1,op2){
+		function arrayRgba(c1, c2, len, op1, op2) {
 			var steps = [];
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.rgba(c1,op1),factory.convert.hex(c2,op2)]}
@@ -396,9 +395,9 @@ angular
 				var c2Vals = factory.get.values(factory.convert.rgba(c2,op2),1);
 
 				for (var i = 0; i < c1Vals.length; i++) {
-					steps.push( c1Vals[i] == c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
+					steps.push( c1Vals[i] === c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 				}
-				for (var i = 0; i < len; i++) {
+				for (i = 0; i < len; i++) {
 					returnVal.push ( 'RGBA(' +
 						Math.floor( steps[0] * i + c1Vals[0] ) + ',' +
 						Math.floor( steps[1] * i + c1Vals[1] ) + ',' +
@@ -409,8 +408,7 @@ angular
 			}
 			return returnVal
 		}
-		function arrayHsl(c1,c2,len){
-			var steps = [];
+		function arrayHsl(c1, c2, len) {
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.hsl(c1),factory.convert.hsl(c2)]}
 			else {
@@ -421,8 +419,7 @@ angular
 			}
 			return returnVal
 		}
-		function arrayHsla(c1,c2,len,o1,o2){
-			var steps = [];
+		function arrayHsla(c1, c2, len, o1, o2) {
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.hsla(c1),factory.convert.hsla(c2)]}
 			else {
