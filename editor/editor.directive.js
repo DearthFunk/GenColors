@@ -3,14 +3,13 @@ angular
 	.directive('editor', editor);
 
 function editor() {
-	var directive = {
+	return {
 		restrict: 'A',
 		replace: true,
 		templateUrl:'editor/editor.html',
 		controller: editorController,
 		bindToController: true
 	};
-	return directive
 }
 
 editorController.$inject = ['$scope', '$element', '$window', 'genColors'];

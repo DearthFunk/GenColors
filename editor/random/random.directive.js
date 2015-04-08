@@ -3,14 +3,13 @@ angular
     .directive('randomDemo', randomDemo);
 
 	function randomDemo() {
-		var directive = {
+		return {
 			restrict: 'A',
 			replace: true,
 			templateUrl:'editor/random/random.html',
 			controller: randomController,
 			bindToController: true
 		};
-		return directive
 	}
 
 	randomController.$inject = ['$scope', 'genColors'];

@@ -3,14 +3,13 @@ angular
     .directive('betweenDemo', betweenDemo);
 
 	function betweenDemo() {
-		var directive = {
+		return {
 			restrict: 'A',
 			replace: true,
 			templateUrl:'editor/between/between.html',
 			controller: betweenController,
 			bindToController: true
 		};
-		return directive
 	}
 
 	betweenController.$inject = ['$scope', 'genColors'];

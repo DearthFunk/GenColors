@@ -66,7 +66,7 @@ angular
 			var returnVal, vals, keys;
 			var colorType = factory.get.colorType(color);
 			if (colorType === 0) {
-				var arr = color.slice(1).match(/.{1,1}/g).slice(0,3);
+				var arr = color.slice(1).split('').slice(0,3);
 				vals = color.length < 7 ?
 					[arr[0]+arr[0], arr[1]+arr[1], arr[2]+arr[2]] :
 					color.slice(1).match(/.{1,2}/g);

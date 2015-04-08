@@ -3,14 +3,13 @@ angular
     .directive('convertDemo', convertDemo);
 
 	function convertDemo() {
-		var directive = {
+		return {
 			restrict: 'A',
 			replace: true,
 			templateUrl:'editor/convert/convert.html',
 			controller: convertController,
 			bindToController: true
 		};
-		return directive
 	}
 
 	convertController.$inject = ['$scope', 'genColors'];

@@ -3,14 +3,13 @@ angular
     .directive('arrayDemo', arrayDemo);
 
 	function arrayDemo() {
-		var directive = {
+		return {
 			restrict: 'A',
 			replace: true,
 			templateUrl:'editor/array/array.html',
 			controller: arrayDemoController,
 			bindToController: true
-		};
-		return directive
+		}
 	}
 
 	arrayDemoController.$inject = ['$scope', 'genColors'];

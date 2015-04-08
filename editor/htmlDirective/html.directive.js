@@ -3,12 +3,11 @@ angular
 	.directive('html', html);
 
 	function html() {
-		var directive = {
+		return {
 			restrict: 'E',
 			controller: htmlController,
 			bindToController: true
 		};
-		return directive
 	}
 
 	htmlController.$inject = ['$element', '$window', '$rootScope'];
