@@ -5,7 +5,6 @@ angular
 	function randomDemo() {
 		var directive = {
 			restrict: 'A',
-			scope: {},
 			replace: true,
 			templateUrl:'editor/random/random.html',
 			controller: randomController,

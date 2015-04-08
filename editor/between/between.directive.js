@@ -5,7 +5,6 @@ angular
 	function betweenDemo() {
 		var directive = {
 			restrict: 'A',
-			scope: {},
 			replace: true,
 			templateUrl:'editor/between/between.html',
 			controller: betweenController,

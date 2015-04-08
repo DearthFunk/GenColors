@@ -5,7 +5,6 @@ angular
 function editor() {
 	var directive = {
 		restrict: 'A',
-		scope: {},
 		replace: true,
 		templateUrl:'editor/editor.html',
 		controller: editorController,

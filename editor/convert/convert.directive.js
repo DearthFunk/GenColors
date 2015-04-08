@@ -5,7 +5,6 @@ angular
 	function convertDemo() {
 		var directive = {
 			restrict: 'A',
-			scope: {},
 			replace: true,
 			templateUrl:'editor/convert/convert.html',
 			controller: convertController,

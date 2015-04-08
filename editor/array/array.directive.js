@@ -5,7 +5,6 @@ angular
 	function arrayDemo() {
 		var directive = {
 			restrict: 'A',
-			scope: {},
 			replace: true,
 			templateUrl:'editor/array/array.html',
 			controller: arrayDemoController,
