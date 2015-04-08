@@ -13,9 +13,9 @@ angular
 		return directive
 	}
 
-	randomController.$inject = ['$scope', 'clr'];
+	randomController.$inject = ['$scope', 'genColors'];
 
-	function randomController($scope, clr) {
-		$scope.clr = clr;
+	function randomController($scope, genColors) {
+		$scope.genColors = genColors;
 		$scope.grey = false;
     }

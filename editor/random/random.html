@@ -3,5 +3,5 @@
         <div class="title">GREY</div>
         <input type="checkbox" data-ng-model="grey">
     </div>
-    <button data-ng-click="background.color = val(0,grey)" data-ng-repeat="(key,val) in clr.random">{{key}}</button>
+    <button data-ng-click="background.color = val(0,grey)" data-ng-repeat="(key,val) in genColors.random">{{key}}</button>
 </div>

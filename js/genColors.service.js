@@ -1,10 +1,10 @@
-angular.module('clrServiceModule', [])
+angular
+	.module('genColorsServiceModule', [])
+	.service('genColors', function(){
 
-	.service('clr', function(){
+        var genColorsScope = this;
 
-        var clrScope = this;
-
-        clrScope.get = {
+        genColorsScope.get = {
 	        colorType: function(color) {
 		        var c = color.slice(0,4).toLowerCase();
 		        return (color[0] == '#' ? 0 :
@@ -19,7 +19,7 @@ angular.module('clrServiceModule', [])
 		        color = color.toUpperCase();
 		        var obj = {};
 		        var returnVal, vals, keys;
-		        var colorType = clrScope.get.colorType(color);
+		        var colorType = genColorsScope.get.colorType(color);
 		        if (colorType == 0) {
 			        vals = color.length < 7 ?
 				        [color.substring(1,2)+color.substring(1,2),color.substring(2,3)+color.substring(2,3),color.substring(3,4)+color.substring(3,4)] :
@@ -85,51 +85,51 @@ angular.module('clrServiceModule', [])
 			        v = m1 + (m2 - m1) * (2/3 - hue) * 6;
 		        else
 			        v = m1;
-		        return numOrHex ? clrScope.convert.numberToHex(255 * v) : clrScope.get.roundedNumber(255 * v,0);
+		        return numOrHex ? genColorsScope.convert.numberToHex(255 * v) : genColorsScope.get.roundedNumber(255 * v,0);
 	        }
         };
-		clrScope.random = {
+		genColorsScope.random = {
 			hex: function(type,greyScale){
 				var returnVal;
 				if (greyScale) {
-                    var hex = clrScope.get.randomNumber(0,15,0).toString(16).toUpperCase() + clrScope.get.randomNumber(0,15,0).toString(16).toUpperCase();
+                    var hex = genColorsScope.get.randomNumber(0,15,0).toString(16).toUpperCase() + genColorsScope.get.randomNumber(0,15,0).toString(16).toUpperCase();
                     returnVal = '#' + hex+hex+hex;
 				}
 				else {
                     returnVal = '#' + ('00000'+(Math.random()*16777216<<0).toString(16)).substr(-6).toUpperCase();
 				}
-				return clrScope.get.values(returnVal,type);
+				return genColorsScope.get.values(returnVal,type);
 			},
 			rgb: function(type,greyScale){
-				var r = clrScope.get.randomNumber(0,255,0);
-				var g = greyScale ? r : clrScope.get.randomNumber(0,255,0);
-				var b = greyScale ? r : clrScope.get.randomNumber(0,255,0);
-				return clrScope.get.values('rgb('+r+','+b+','+g+')',type);
+				var r = genColorsScope.get.randomNumber(0,255,0);
+				var g = greyScale ? r : genColorsScope.get.randomNumber(0,255,0);
+				var b = greyScale ? r : genColorsScope.get.randomNumber(0,255,0);
+				return genColorsScope.get.values('rgb('+r+','+b+','+g+')',type);
 			},
 			hsl: function(type,greyScale) {
-				var h = clrScope.get.randomNumber(0,240,0);
-				var s = greyScale ? '0%' : clrScope.get.randomNumber(0,100,0) + '%';
-				var l = clrScope.get.randomNumber(0,100,0) + '%';
-				return clrScope.get.values('HSL('+h+','+s+','+l+')',type);
+				var h = genColorsScope.get.randomNumber(0,240,0);
+				var s = greyScale ? '0%' : genColorsScope.get.randomNumber(0,100,0) + '%';
+				var l = genColorsScope.get.randomNumber(0,100,0) + '%';
+				return genColorsScope.get.values('HSL('+h+','+s+','+l+')',type);
 			},
 			rgba: function(type,greyScale,opacity){
-				var r =  clrScope.get.randomNumber(0,255,0);
-				var g = greyScale ? r : clrScope.get.randomNumber(0,255,0);
-				var b = greyScale ? r : clrScope.get.randomNumber(0,255,0);
-				var a = opacity == undefined ? clrScope.get.randomNumber(0,1,4) : opacity;
-				return clrScope.get.values('RGBA('+r+','+g+','+b+','+a+')',type);
+				var r =  genColorsScope.get.randomNumber(0,255,0);
+				var g = greyScale ? r : genColorsScope.get.randomNumber(0,255,0);
+				var b = greyScale ? r : genColorsScope.get.randomNumber(0,255,0);
+				var a = opacity == undefined ? genColorsScope.get.randomNumber(0,1,4) : opacity;
+				return genColorsScope.get.values('RGBA('+r+','+g+','+b+','+a+')',type);
 			},
 			hsla: function(type,greyScale,opacity) {
 				var returnVal;
-				var h = clrScope.get.randomNumber(0,240,0);
-				var s = greyScale ? '0%' : clrScope.get.randomNumber(0,100,0) + '%';
-				var l = clrScope.get.randomNumber(0,100,0) + '%';
-				var a = opacity == undefined ? clrScope.get.randomNumber(0,1,4) : opacity;
-				return clrScope.get.values('HSLA('+h+','+s+','+l+','+a+')',type);
+				var h = genColorsScope.get.randomNumber(0,240,0);
+				var s = greyScale ? '0%' : genColorsScope.get.randomNumber(0,100,0) + '%';
+				var l = genColorsScope.get.randomNumber(0,100,0) + '%';
+				var a = opacity == undefined ? genColorsScope.get.randomNumber(0,1,4) : opacity;
+				return genColorsScope.get.values('HSLA('+h+','+s+','+l+','+a+')',type);
 			}
 		};
 
-		clrScope.convert = {
+		genColorsScope.convert = {
             numberToHex: function(x) {
 	            return x>=0&&x<=255?('0' + parseInt(x).toString(16)).slice(-2).toUpperCase() : '00'; },
             hexToNumber: function(x) {
@@ -139,8 +139,8 @@ angular.module('clrServiceModule', [])
 			hex: function(color) {
 				color = color.toUpperCase();
 				var returnVal;
-				var colorType = clrScope.get.colorType(color);
-				var vals = clrScope.get.values(color,1,true);
+				var colorType = genColorsScope.get.colorType(color);
+				var vals = genColorsScope.get.values(color,1,true);
 				if (colorType == 0) {
 					if (color.length == 7) {
 						returnVal = color;
@@ -154,7 +154,7 @@ angular.module('clrServiceModule', [])
 					}
 				}
 				else if (colorType == 1 || colorType == 2) {
-					returnVal =  '#' + clrScope.convert.numberToHex(vals[0]) + clrScope.convert.numberToHex(vals[1]) + clrScope.convert.numberToHex(vals[2]);
+					returnVal =  '#' + genColorsScope.convert.numberToHex(vals[0]) + genColorsScope.convert.numberToHex(vals[1]) + genColorsScope.convert.numberToHex(vals[2]);
 				}
 				else if (colorType == 3 || colorType == 4) {
 					var m1, m2, hue;
@@ -165,9 +165,9 @@ angular.module('clrServiceModule', [])
 						hue = vals[0] / 360;
 					}
 					returnVal = '#' +
-						clrScope.get.hue(m1, m2, hue + 1/3,true) +
-						clrScope.get.hue(m1, m2, hue,true) +
-						clrScope.get.hue(m1, m2, hue - 1/3,true);
+						genColorsScope.get.hue(m1, m2, hue + 1/3,true) +
+						genColorsScope.get.hue(m1, m2, hue,true) +
+						genColorsScope.get.hue(m1, m2, hue - 1/3,true);
 				}
 				else {
 					returnVal = color;
@@ -177,14 +177,14 @@ angular.module('clrServiceModule', [])
 			rgb: function(color) {
 				color = color.toUpperCase();
 				var returnVal;
-				var colorType = clrScope.get.colorType(color);
-				var vals = clrScope.get.values(color,1,true);
+				var colorType = genColorsScope.get.colorType(color);
+				var vals = genColorsScope.get.values(color,1,true);
 
 				if (colorType == 0) {
 					returnVal = 'RGB('+
-						clrScope.convert.hexToNumber(vals[0]) + ','+
-						clrScope.convert.hexToNumber(vals[1]) + ','+
-						clrScope.convert.hexToNumber(vals[2]) + ')';
+						genColorsScope.convert.hexToNumber(vals[0]) + ','+
+						genColorsScope.convert.hexToNumber(vals[1]) + ','+
+						genColorsScope.convert.hexToNumber(vals[2]) + ')';
 				}
 				else if (colorType == 1) {
 					returnVal = color;
@@ -201,23 +201,23 @@ angular.module('clrServiceModule', [])
 						hue = vals[0] / 360;
 					}
 					returnVal = 'RGB(' +
-						clrScope.get.hue(m1, m2, hue + 1/3) + ',' +
-						clrScope.get.hue(m1, m2, hue) + ',' +
-						clrScope.get.hue(m1, m2, hue - 1/3) + ')';
+						genColorsScope.get.hue(m1, m2, hue + 1/3) + ',' +
+						genColorsScope.get.hue(m1, m2, hue) + ',' +
+						genColorsScope.get.hue(m1, m2, hue - 1/3) + ')';
 				}
 				return returnVal
 			},
 			rgba: function(color,opacity) {
 				color = color.toUpperCase();
 				var returnVal;
-				var colorType = clrScope.get.colorType(color);
-				var vals = clrScope.get.values(color,1,true);
+				var colorType = genColorsScope.get.colorType(color);
+				var vals = genColorsScope.get.values(color,1,true);
 				var o = colorType == 2 || colorType == 4 ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
 				if (colorType == 0) {
 					returnVal = 'RGBA('+
-						clrScope.convert.hexToNumber(vals[0]) + ','+
-						clrScope.convert.hexToNumber(vals[1]) + ','+
-						clrScope.convert.hexToNumber(vals[2]) + ','+
+						genColorsScope.convert.hexToNumber(vals[0]) + ','+
+						genColorsScope.convert.hexToNumber(vals[1]) + ','+
+						genColorsScope.convert.hexToNumber(vals[2]) + ','+
 						o + ')';
 				}
 				else if (colorType == 1) {
@@ -235,18 +235,18 @@ angular.module('clrServiceModule', [])
 						hue = vals[0] / 360;
 					}
 					returnVal = 'RGBA(' +
-						clrScope.get.hue(m1, m2, hue + 1/3) + ',' +
-						clrScope.get.hue(m1, m2, hue) + ',' +
-						clrScope.get.hue(m1, m2, hue - 1/3) + ',' + o + ')';
+						genColorsScope.get.hue(m1, m2, hue + 1/3) + ',' +
+						genColorsScope.get.hue(m1, m2, hue) + ',' +
+						genColorsScope.get.hue(m1, m2, hue - 1/3) + ',' + o + ')';
 				}
 				return returnVal
 			},
 			hsl: function(color) {
 				var returnVal;
-				var colorType = clrScope.get.colorType(color);
-				var vals = clrScope.get.values(color,1,true);
+				var colorType = genColorsScope.get.colorType(color);
+				var vals = genColorsScope.get.values(color,1,true);
 				if (colorType == 0 || colorType == 1 || colorType == 2) {
-					var hexVals = clrScope.get.values(clrScope.convert.rgb(color),1);
+					var hexVals = genColorsScope.get.values(genColorsScope.convert.rgb(color),1);
 					var r = colorType == 0 ? hexVals[0] : vals[0];
 					var g = colorType == 0 ? hexVals[1] : vals[1];
 					var b = colorType == 0 ? hexVals[2] : vals[2];
@@ -273,11 +273,11 @@ angular.module('clrServiceModule', [])
 			},
 			hsla: function(color,opacity) {
 				var returnVal;
-				var colorType = clrScope.get.colorType(color);
-				var vals = clrScope.get.values(color,1,true);
+				var colorType = genColorsScope.get.colorType(color);
+				var vals = genColorsScope.get.values(color,1,true);
 				var o = colorType == 2 || colorType == 4 ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
 				if (colorType == 0 || colorType == 1 || colorType == 2) {
-					var hexVals = clrScope.get.values(clrScope.convert.rgb(color),1);
+					var hexVals = genColorsScope.get.values(genColorsScope.convert.rgb(color),1);
 					var r = colorType == 0 ? hexVals[0] : vals[0];
 					var g = colorType == 0 ? hexVals[1] : vals[1];
 					var b = colorType == 0 ? hexVals[2] : vals[2];
@@ -303,30 +303,30 @@ angular.module('clrServiceModule', [])
 			}
 		};
 
-		clrScope.between = {
-			hex:  function(c1,c2) {return clrScope.array.hex(c1,c2,3)[1]},
-			rgb:  function(c1,c2) {return clrScope.array.rgb(c1,c2,3)[1]},
-			hsl:  function(c1,c2) {return clrScope.array.hsl(c1,c2,3)[1]},
-			rgba: function(c1,c2,o1,o2) {return clrScope.array.rgba(c1,c2,3,o1,o2)[1]},
-			hsla: function(c1,c2,o1,o2) {return clrScope.array.hsla(c1,c2,3,o1,o2)[1]}
+		genColorsScope.between = {
+			hex:  function(c1,c2) {return genColorsScope.array.hex(c1,c2,3)[1]},
+			rgb:  function(c1,c2) {return genColorsScope.array.rgb(c1,c2,3)[1]},
+			hsl:  function(c1,c2) {return genColorsScope.array.hsl(c1,c2,3)[1]},
+			rgba: function(c1,c2,o1,o2) {return genColorsScope.array.rgba(c1,c2,3,o1,o2)[1]},
+			hsla: function(c1,c2,o1,o2) {return genColorsScope.array.hsla(c1,c2,3,o1,o2)[1]}
 		};
 
-		clrScope.array = {
+		genColorsScope.array = {
 			hex: function(c1,c2,len){
 					var steps = [];
 					var returnVal = [];
-					if (len < 3) {returnVal = [clrScope.convert.hex(c1),clrScope.convert.hex(c2)]}
+					if (len < 3) {returnVal = [genColorsScope.convert.hex(c1),genColorsScope.convert.hex(c2)]}
 					else {
-					var c1Vals = clrScope.get.values(clrScope.convert.rgb(c1),1);
-					var c2Vals = clrScope.get.values(clrScope.convert.rgb(c2),1);
+					var c1Vals = genColorsScope.get.values(genColorsScope.convert.rgb(c1),1);
+					var c2Vals = genColorsScope.get.values(genColorsScope.convert.rgb(c2),1);
 					for (var i = 0; i < c1Vals.length; i++) {
 						steps.push( c1Vals[i] == c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 					}
 					for (var i = 0; i < len; i++) {
 						returnVal.push ( '#' +
-							clrScope.convert.numberToHex(Math.floor( steps[0] * i + c1Vals[0] )) +
-							clrScope.convert.numberToHex(Math.floor( steps[1] * i + c1Vals[1] )) +
-							clrScope.convert.numberToHex(Math.floor( steps[2] * i + c1Vals[2] ))
+							genColorsScope.convert.numberToHex(Math.floor( steps[0] * i + c1Vals[0] )) +
+							genColorsScope.convert.numberToHex(Math.floor( steps[1] * i + c1Vals[1] )) +
+							genColorsScope.convert.numberToHex(Math.floor( steps[2] * i + c1Vals[2] ))
 						)
 					}
 				}
@@ -335,10 +335,10 @@ angular.module('clrServiceModule', [])
 			rgb: function(c1,c2,len){
 				var steps = [];
 				var returnVal = [];
-				if (len < 3) {returnVal = [clrScope.convert.rgb(c1),clrScope.convert.rgb(c2)]}
+				if (len < 3) {returnVal = [genColorsScope.convert.rgb(c1),genColorsScope.convert.rgb(c2)]}
 				else {
-					var c1Vals = clrScope.get.values(clrScope.convert.rgb(c1),1);
-					var c2Vals = clrScope.get.values(clrScope.convert.rgb(c2),1);
+					var c1Vals = genColorsScope.get.values(genColorsScope.convert.rgb(c1),1);
+					var c2Vals = genColorsScope.get.values(genColorsScope.convert.rgb(c2),1);
 					for (var i = 0; i < c1Vals.length; i++) {
 						steps.push( c1Vals[i] == c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 					}
@@ -355,10 +355,10 @@ angular.module('clrServiceModule', [])
 			rgba: function(c1,c2,len,op1,op2){
 				var steps = [];
 				var returnVal = [];
-				if (len < 3) {returnVal = [clrScope.convert.rgba(c1,op1),clrScope.convert.hex(c2,op2)]}
+				if (len < 3) {returnVal = [genColorsScope.convert.rgba(c1,op1),genColorsScope.convert.hex(c2,op2)]}
 				else {
-					var c1Vals = clrScope.get.values(clrScope.convert.rgba(c1,op1),1);
-					var c2Vals = clrScope.get.values(clrScope.convert.rgba(c2,op2),1);
+					var c1Vals = genColorsScope.get.values(genColorsScope.convert.rgba(c1,op1),1);
+					var c2Vals = genColorsScope.get.values(genColorsScope.convert.rgba(c2,op2),1);
 
 					for (var i = 0; i < c1Vals.length; i++) {
 						steps.push( c1Vals[i] == c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
@@ -368,7 +368,7 @@ angular.module('clrServiceModule', [])
 							Math.floor( steps[0] * i + c1Vals[0] ) + ',' +
 							Math.floor( steps[1] * i + c1Vals[1] ) + ',' +
 							Math.floor( steps[2] * i + c1Vals[2] ) + ',' +
-							clrScope.get.roundedNumber(Number(steps[3] * i + c1Vals[3]),2) + ')'
+							genColorsScope.get.roundedNumber(Number(steps[3] * i + c1Vals[3]),2) + ')'
 						)
 					}
 				}
@@ -377,11 +377,11 @@ angular.module('clrServiceModule', [])
 			hsl: function(c1,c2,len){
 				var steps = [];
 				var returnVal = [];
-				if (len < 3) {returnVal = [clrScope.convert.hsl(c1),clrScope.convert.hsl(c2)]}
+				if (len < 3) {returnVal = [genColorsScope.convert.hsl(c1),genColorsScope.convert.hsl(c2)]}
 				else {
-                    returnVal = clrScope.array.rgb(c1,c2,len);
+                    returnVal = genColorsScope.array.rgb(c1,c2,len);
                     for (var i = 0; i < returnVal.length; i++) {
-                        returnVal[i] = clrScope.convert.hsl(returnVal[i]);
+                        returnVal[i] = genColorsScope.convert.hsl(returnVal[i]);
                     }
 				}
 				return returnVal
@@ -389,11 +389,11 @@ angular.module('clrServiceModule', [])
 			hsla: function(c1,c2,len,o1,o2){
 				var steps = [];
 				var returnVal = [];
-				if (len < 3) {returnVal = [clrScope.convert.hsla(c1),clrScope.convert.hsla(c2)]}
+				if (len < 3) {returnVal = [genColorsScope.convert.hsla(c1),genColorsScope.convert.hsla(c2)]}
 				else {
-                    returnVal = clrScope.array.rgba(c1,c2,len,o1,o2);
+                    returnVal = genColorsScope.array.rgba(c1,c2,len,o1,o2);
                     for (var i = 0; i < returnVal.length; i++) {
-                        returnVal[i] = clrScope.convert.hsla(returnVal[i]);
+                        returnVal[i] = genColorsScope.convert.hsla(returnVal[i]);
                     }
 				}
 				return returnVal
@@ -401,7 +401,7 @@ angular.module('clrServiceModule', [])
 		};
 
 
-        clrScope.edit = {
+        genColorsScope.edit = {
             shade: {
 				getShading : function(color,rD,gD,bD) {
 					rD = rD == undefined ? 0 : rD;
@@ -412,28 +412,28 @@ angular.module('clrServiceModule', [])
 	                rD = rD == undefined ? 0 : rD;
 	                gD = gD == undefined ? 0 : gD;
 	                bD = bD == undefined ? 0 : bD;
-                    var cArray = clrScope.get.values(color,1);
+                    var cArray = genColorsScope.get.values(color,1);
                     var r = parseInt(cArray[0] * (1 + rD)) > 255 ? 255 : parseInt(cArray[0] * (1 + rD));
                     var g = parseInt(cArray[1] * (1 + gD)) > 255 ? 255 : parseInt(cArray[1] * (1 + gD));
                     var b = parseInt(cArray[2] * (1 + bD)) > 255 ? 255 : parseInt(cArray[2] * (1 + bD));
                     return 'RGB(' + r + ',' + g + ',' + b  +')';
                 },
                 rgba: function(color,percent) {
-                    var cArray = clrScope.get.values(color,1);
+                    var cArray = genColorsScope.get.values(color,1);
 	                var r = parseInt(cArray[0] * (1 + percent)) > 255 ? 255 : parseInt(cArray[0] * (1 + percent));
 	                var g = parseInt(cArray[1] * (1 + percent)) > 255 ? 255 : parseInt(cArray[1] * (1 + percent));
 	                var b = parseInt(cArray[2] * (1 + percent)) > 255 ? 255 : parseInt(cArray[2] * (1 + percent));
                     return 'RGB(' + r + ',' + g + ',' + b  + ',' + cArray[3] + ')';
                 },
                 hex: function(color,percent) {
-                    var cArray = clrScope.get.values(color,1);
+                    var cArray = genColorsScope.get.values(color,1);
                     for (var i = 0; i < cArray.length; i++) {
-                        cArray[i] = clrScope.convert.hexToNumber(cArray[i]);
+                        cArray[i] = genColorsScope.convert.hexToNumber(cArray[i]);
                     }
 	                var r = parseInt(cArray[0] * (1 + percent)) > 255 ? 255 : parseInt(cArray[0] * (1 + percent));
 	                var g = parseInt(cArray[1] * (1 + percent)) > 255 ? 255 : parseInt(cArray[1] * (1 + percent));
 	                var b = parseInt(cArray[2] * (1 + percent)) > 255 ? 255 : parseInt(cArray[2] * (1 + percent));
-                    return '#' + clrScope.convert.numberToHex(r) + clrScope.convert.numberToHex(g) + clrScope.convert.numberToHex(b);
+                    return '#' + genColorsScope.convert.numberToHex(r) + genColorsScope.convert.numberToHex(g) + genColorsScope.convert.numberToHex(b);
                 }
             }
         };

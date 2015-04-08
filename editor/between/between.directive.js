@@ -13,10 +13,10 @@ angular
 		return directive
 	}
 
-	betweenController.$inject = ['$scope', 'clr'];
+	betweenController.$inject = ['$scope', 'genColors'];
 
-	function betweenController($scope, clr) {
-        $scope.clr = clr;
+	function betweenController($scope, genColors) {
+        $scope.genColors = genColors;
         $scope.c1 = '#FF0000';
         $scope.c2 = 'rgb(0,0,255)';
         $scope.o1 = 0;

@@ -13,9 +13,9 @@ function editor() {
 	return directive
 }
 
-editorController.$inject = ['$scope', '$element', '$window', 'clr'];
+editorController.$inject = ['$scope', '$element', '$window', 'genColors'];
 
-function editorController($scope, $element, $window, clr) {
+function editorController($scope, $element, $window, genColors) {
 
 	var windowPadding = 20;
 	var boundingRect = $element[0].getBoundingClientRect ();
@@ -31,18 +31,18 @@ function editorController($scope, $element, $window, clr) {
 		{name: 'RANDOM'},
 		{name: 'CONVERT'},
 		{name: 'BETWEEN', data: {
-			hex: {c1: clr.random.rgb (), c2: clr.random.rgb (), val: ''},
-			rgb: {c1: clr.random.hex (), c2: clr.random.hex (), val: ''},
-			hsl: {c1: clr.random.rgba (), c2: clr.random.hsl (), val: ''},
-			rgba: {c1: clr.random.rgb (), c2: clr.random.hex (), o1: 0, o2: 1, val: ''},
-			hsla: {c1: clr.random.rgba (), c2: clr.random.hex (), o1: 0, o2: 1, val: ''}}
+			hex: {c1: genColors.random.rgb (), c2: genColors.random.rgb (), val: ''},
+			rgb: {c1: genColors.random.hex (), c2: genColors.random.hex (), val: ''},
+			hsl: {c1: genColors.random.rgba (), c2: genColors.random.hsl (), val: ''},
+			rgba: {c1: genColors.random.rgb (), c2: genColors.random.hex (), o1: 0, o2: 1, val: ''},
+			hsla: {c1: genColors.random.rgba (), c2: genColors.random.hex (), o1: 0, o2: 1, val: ''}}
 		},
 		{name: 'ARRAY', data: {
-			hex: {c1: clr.random.rgb (), c2: clr.random.rgb (), len: 5, val: ''},
-			rgb: {c1: clr.random.hex (), c2: clr.random.hex (), len: 5, val: ''},
-			hsl: {c1: clr.random.rgba (), c2: clr.random.hsl (), len: 5, val: ''},
-			rgba: {c1: clr.random.rgb (), c2: clr.random.hex (), len: 5, o1: 0, o2: 1, val: ''},
-			hsla: {c1: clr.random.rgba (), c2: clr.random.hex (), len: 5, o1: 0, o2: 1, val: ''}}
+			hex: {c1: genColors.random.rgb (), c2: genColors.random.rgb (), len: 5, val: ''},
+			rgb: {c1: genColors.random.hex (), c2: genColors.random.hex (), len: 5, val: ''},
+			hsl: {c1: genColors.random.rgba (), c2: genColors.random.hsl (), len: 5, val: ''},
+			rgba: {c1: genColors.random.rgb (), c2: genColors.random.hex (), len: 5, o1: 0, o2: 1, val: ''},
+			hsla: {c1: genColors.random.rgba (), c2: genColors.random.hex (), len: 5, o1: 0, o2: 1, val: ''}}
 		}
 	];
 

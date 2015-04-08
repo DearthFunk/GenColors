@@ -13,10 +13,10 @@ angular
 		return directive
 	}
 
-	arrayDemoController.$inject = ['$scope', 'clr'];
+	arrayDemoController.$inject = ['$scope', 'genColors'];
 
-	function arrayDemoController($scope, clr) {
-        $scope.clr = clr;
+	function arrayDemoController($scope, genColors) {
+        $scope.genColors = genColors;
         $scope.c1 = '#FF0000';
         $scope.c2 = 'rgb(0,0,255)';
         $scope.o1 = 0;

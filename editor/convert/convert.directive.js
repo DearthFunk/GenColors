@@ -13,10 +13,10 @@ angular
 		return directive
 	}
 
-	convertController.$inject = ['$scope', 'clr'];
+	convertController.$inject = ['$scope', 'genColors'];
 
-	function convertController($scope, clr) {
-        $scope.clr = clr;
+	function convertController($scope, genColors) {
+        $scope.genColors = genColors;
         $scope.toConvert = '#FF0000';
         $scope.opacity = 1;
     }
