@@ -15,7 +15,8 @@ angular
 		$scope.background = { color:'#FF0000' };
 	
 		$scope.getBackground = getBackground;
-		$scope.$watch('background.color', updateBackground);
+		$scope.updateBackground = updateBackground;
+		$scope.$watch('background.color', $scope.updateBackground);
 
 		///////////////////////////////////////
 

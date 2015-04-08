@@ -1,7 +1,5 @@
 <div class="editorContainer" data-ng-style="{left: left+'px', top:top+'px'}" data-ng-class="{border:minimized}">
-    <div class="header" data-ng-mousedown="moveModule($event)" data-ng-class="{border:minimized}">
-        DEMO <i class="fa {{minimized ? 'fa-arrow-up' : 'fa-arrow-down'}}" data-ng-click="toggleMinimize($event)"></i>
-    </div>
+    <div class="header" data-ng-mousedown="moveModule($event)">DEMO</div>
 
     <div class="topContainer">
         <div id="copyButton" class="copyButton" data-clipboard-text="{{background.color}}">
@@ -10,14 +8,13 @@
         </div>
     </div>
 
-    <div class="editorBody" data-ng-show="minimized">
+    <div class="editorBody">
         <div class="section" data-ng-repeat="item in data track by $index">
             <div class="title" data-ng-class="{active:$index==activeControls}" data-ng-click="selectControls($index)">{{item.name}}</div>
             <div data-ng-if="activeControls == $index && $index == 0" class="content" random-demo></div>
             <div data-ng-if="activeControls == $index && $index == 1" class="content" convert-demo></div>
             <div data-ng-if="activeControls == $index && $index == 2" class="content" between-demo data-background="background" data-data="item.data"></div>
             <div data-ng-if="activeControls == $index && $index == 3" class="content" array-demo   data-background="background" data-data="item.data"></div>
-
         </div>
     </div>
 

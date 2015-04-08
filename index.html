@@ -36,11 +36,11 @@
         <script type="text/javascript" src="app/app.controller.js"></script>
 
     <!--EDITOR--------------------------------------------------------------------------------------------------------->
-        <script type="text/javascript" src="editor/editor.js"></script>
-        <script type="text/javascript" src="editor/random/random.js"></script>
-        <script type="text/javascript" src="editor/convert/convert.js"></script>
-        <script type="text/javascript" src="editor/between/between.js"></script>
-        <script type="text/javascript" src="editor/array/array.js"></script>
+        <script type="text/javascript" src="editor/editor.directive.js"></script>
+        <script type="text/javascript" src="editor/random/random.directive.js"></script>
+        <script type="text/javascript" src="editor/convert/convert.directive.js"></script>
+        <script type="text/javascript" src="editor/between/between.directive.js"></script>
+        <script type="text/javascript" src="editor/array/array.directive.js"></script>
 
 	<!-- STYLES -->
 		<link rel="stylesheet/less" href="app/app.less">
@@ -49,7 +49,7 @@
 </head>
 
 <body data-ng-controller="genColorsController" data-ng-style="{backgroundColor: getBackground()}">
-    <div class="editor"></div>
+    <div editor></div>
     <div class="arrayBackground" data-ng-if="arrayBackground">
         <div class="slice" data-ng-repeat="item in background.color track by $index" data-ng-style="{backgroundColor:item, width:sliceWidth+'px'}"></div>
     </div>
