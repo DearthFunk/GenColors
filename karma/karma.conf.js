@@ -1,50 +1,52 @@
 // Karma configuration
 module.exports = function(config) {
+	console.log(config);
 	config.set({
 		// base path, that will be used to resolve files and exclude
 		basePath: '',
-
-		// testing framework to use (jasmine/mocha/qunit/...)
+		port: 8080,
 		frameworks: ['jasmine'],
+		singleRun: false,
+		logLevel: config.LOG_INFO,
+		autoWatch: true,
+		reporters: ["progress"],
+		colors: true,
 
-		// list of files / patterns to load in the browser
+		preprocessors: {
+			"../**/*.html": ["ng-html2js"],
+			"../**/!(*.spec|*.unit|*.mock).js": ["coverage"]
+		},
 		files: [
 			'../lib/angular.js',
 			'../lib/angular-mocks.js',
-			'../karma/karmaTest.unit.js'
+			'../karma/karmaTest.unit.js',
+			'../js/genColors.service.js',
+			'../js/genColors.service.spec.js'
 		],
-
-		// list of files / patterns to exclude
 		exclude: [],
-
-		// web server port
-		port: 8080,
-
-		// level of logging
-		// possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
-		logLevel: config.LOG_INFO,
-
-		// enable / disable watching file and executing tests whenever any file changes
-		autoWatch: true,
-
-
-		"reporters": ["progress"],
-		"colors": true,
-
-		// Start these browsers, currently available:
-		// - Chrome
-		// - ChromeCanary
-		// - Firefox
-		// - Opera
-		// - Safari (only Mac)
-		// - PhantomJS
-		// - IE (only Windows)
-		"browsers": {
-			"local": ["PhantomJS"],
-			"browserStack": ["bs_firefox_mac"]
+		"customLaunchers": {
+			"local": {},
+			"browserStack": {
+				"IE10": {
+					"base": "IE",
+					"x-ua-compatible": "IE=EmulateIE10"
+				},
+				"IE9": {
+					"base": "IE",
+					"x-ua-compatible": "IE=EmulateIE9"
+				},
+				"bs_firefox_mac": {
+					"base": "BrowserStack",
+					"browser": "firefox",
+					"browser_version": "21.0",
+					"os": "OS X",
+					"os_version": "Mountain Lion"
+				}
+			}
 		},
-		// Continuous Integration mode
-		// if true, it capture browsers, run tests and exit
-		singleRun: false
+		browsers: {
+			local: ["PhantomJS"],
+			browserStack: ["bs_firefox_mac"]
+		}
 	});
 };
