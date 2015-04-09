@@ -12,9 +12,10 @@ angular
 		};
 	}
 
-	randomController.$inject = ['$scope', 'genColors'];
+	randomController.$inject = ['$scope', 'genColors', 'RETURN_TYPE'];
 
-	function randomController($scope, genColors) {
+	function randomController($scope, genColors, RETURN_TYPE) {
+		$scope.RETURN_TYPE = RETURN_TYPE;
 		$scope.genColors = genColors;
 		$scope.grey = false;
     }

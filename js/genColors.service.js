@@ -7,11 +7,16 @@ angular
 		RGBA: 2,
 		HSL: 3,
 		HSLA: 4
+	})
+	.constant('RETURN_TYPE', {
+		STRING: 0,
+		ARRAY: 1,
+		OBJECT: 2
 	});
 
-	genColors.$inject = ['COLOR_TYPE'];
+	genColors.$inject = ['COLOR_TYPE', 'RETURN_TYPE'];
 
-	function genColors(COLOR_TYPE){
+	function genColors(COLOR_TYPE, RETURN_TYPE){
 
         var factory = {
 	        get: {
@@ -100,9 +105,9 @@ angular
 				}
 			}
 			switch(returnType) {
-				case 0: returnVal = color; break;
-				case 1: returnVal = vals; break;
-				case 2:	returnVal = angular.copy(obj); break;
+				case RETURN_TYPE.STRING: returnVal = color; break;
+				case RETURN_TYPE.ARRAY: returnVal = vals; break;
+				case RETURN_TYPE.OBJECT: returnVal = angular.copy(obj); break;
 				default: returnVal = color;
 			}
 			return returnVal
@@ -189,7 +194,7 @@ angular
 			color = color.toUpperCase();
 			var returnVal;
 			var colorType = factory.get.colorType(color);
-			var vals = factory.get.values(color,1,true);
+			var vals = factory.get.values(color,RETURN_TYPE.ARRAY,true);
 			if (colorType === COLOR_TYPE.HEX) {
 				if (color.length === 7) {
 					returnVal = color;
@@ -227,7 +232,7 @@ angular
 			color = color.toUpperCase();
 			var returnVal;
 			var colorType = factory.get.colorType(color);
-			var vals = factory.get.values(color,1,true);
+			var vals = factory.get.values(color,RETURN_TYPE.ARRAY,true);
 
 			if (colorType === COLOR_TYPE.HEX) {
 				returnVal = 'RGB('+
@@ -260,7 +265,7 @@ angular
 			color = color.toUpperCase();
 			var returnVal;
 			var colorType = factory.get.colorType(color);
-			var vals = factory.get.values(color,1,true);
+			var vals = factory.get.values(color,RETURN_TYPE.ARRAY,true);
 			var o = colorType === COLOR_TYPE.RGBA || colorType === COLOR_TYPE.HSLA ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
 			if (colorType === COLOR_TYPE.HEX) {
 				returnVal = 'RGBA('+
@@ -293,9 +298,9 @@ angular
 		function convertHsl(color) {
 			var returnVal;
 			var colorType = factory.get.colorType(color);
-			var vals = factory.get.values(color,1,true);
+			var vals = factory.get.values(color,RETURN_TYPE.ARRAY,true);
 			if ([COLOR_TYPE.HEX,COLOR_TYPE.RGB,COLOR_TYPE.RGBA].indexOf(colorType) !== -1) {
-				var hexVals = factory.get.values(factory.convert.rgb(color),1);
+				var hexVals = factory.get.values(factory.convert.rgb(color),RETURN_TYPE.ARRAY);
 				var r = (colorType === COLOR_TYPE.HEX ? hexVals[0] : vals[0])/255;
 				var g = (colorType === COLOR_TYPE.HEX ? hexVals[1] : vals[1])/255;
 				var b = (colorType === COLOR_TYPE.HEX ? hexVals[2] : vals[2])/255;
@@ -322,10 +327,10 @@ angular
 		function convertHsla(color, opacity) {
 			var returnVal;
 			var colorType = factory.get.colorType(color);
-			var vals = factory.get.values(color,1,true);
+			var vals = factory.get.values(color,RETURN_TYPE.ARRAY,true);
 			var o = colorType === COLOR_TYPE.RGBA || colorType === COLOR_TYPE.HSLA ? vals[3] : opacity < 0 ? 0 : opacity > 1 || angular.isUndefined(opacity) ? 1 : opacity;
 			if (colorType === COLOR_TYPE.HEX || colorType === COLOR_TYPE.RGB || colorType === COLOR_TYPE.RGBA) {
-				var hexVals = factory.get.values(factory.convert.rgb(color),1);
+				var hexVals = factory.get.values(factory.convert.rgb(color),RETURN_TYPE.ARRAY);
 				var r = (colorType === COLOR_TYPE.HEX ? hexVals[0] : vals[0])/255;
 				var g = (colorType === COLOR_TYPE.HEX ? hexVals[1] : vals[1])/255;
 				var b = (colorType === COLOR_TYPE.HEX ? hexVals[2] : vals[2])/255;
@@ -358,8 +363,8 @@ angular
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.hex(c1),factory.convert.hex(c2)]}
 			else {
-				var c1Vals = factory.get.values(factory.convert.rgb(c1),1);
-				var c2Vals = factory.get.values(factory.convert.rgb(c2),1);
+				var c1Vals = factory.get.values(factory.convert.rgb(c1),RETURN_TYPE.ARRAY);
+				var c2Vals = factory.get.values(factory.convert.rgb(c2),RETURN_TYPE.ARRAY);
 				for (var i = 0; i < c1Vals.length; i++) {
 					steps.push( c1Vals[i] === c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 				}
@@ -378,8 +383,8 @@ angular
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.rgb(c1),factory.convert.rgb(c2)]}
 			else {
-				var c1Vals = factory.get.values(factory.convert.rgb(c1),1);
-				var c2Vals = factory.get.values(factory.convert.rgb(c2),1);
+				var c1Vals = factory.get.values(factory.convert.rgb(c1),RETURN_TYPE.ARRAY);
+				var c2Vals = factory.get.values(factory.convert.rgb(c2),RETURN_TYPE.ARRAY);
 				for (var i = 0; i < c1Vals.length; i++) {
 					steps.push( c1Vals[i] === c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
 				}
@@ -398,8 +403,8 @@ angular
 			var returnVal = [];
 			if (len < 3) {returnVal = [factory.convert.rgba(c1,op1),factory.convert.hex(c2,op2)]}
 			else {
-				var c1Vals = factory.get.values(factory.convert.rgba(c1,op1),1);
-				var c2Vals = factory.get.values(factory.convert.rgba(c2,op2),1);
+				var c1Vals = factory.get.values(factory.convert.rgba(c1,op1),RETURN_TYPE.ARRAY);
+				var c2Vals = factory.get.values(factory.convert.rgba(c2,op2),RETURN_TYPE.ARRAY);
 
 				for (var i = 0; i < c1Vals.length; i++) {
 					steps.push( c1Vals[i] === c2Vals[i] ? 0 : (c1Vals[i] - c2Vals[i]) / (len-1) * -1 );
