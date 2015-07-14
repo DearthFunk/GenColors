@@ -43,7 +43,8 @@ function editorController($scope, $element, $window, genColors) {
 			hsl: {c1: genColors.random.rgba (), c2: genColors.random.hsl (), len: 5, val: ''},
 			rgba: {c1: genColors.random.rgb (), c2: genColors.random.hex (), len: 5, o1: 0, o2: 1, val: ''},
 			hsla: {c1: genColors.random.rgba (), c2: genColors.random.hex (), len: 5, o1: 0, o2: 1, val: ''}}
-		}
+		},
+		{name: 'RANDOM BETWEEN'}
 	];
 
 	$scope.$on ('resizeEvent', adjustWindowSize);
