@@ -450,7 +450,6 @@ angular
 			return returnVal
 		}
 		function randomBetweenHex(c1, c2) {
-			console.log(c1, c2);
 			var c1Vals = factory.get.values(factory.convert.rgb(c1), RETURN_TYPE.ARRAY);
 			var c2Vals = factory.get.values(factory.convert.rgb(c2), RETURN_TYPE.ARRAY);
 			var clrs = [];
@@ -478,11 +477,24 @@ angular
 			}
 			return 'RGBA(' + clrs[0] + ',' + clrs[1] + ',' + clrs[2] + ',' + clrs[3] + ')';
 		}
-		function randomBetweenHsl() {
-
+		function randomBetweenHsl(c1, c2) {
+			var c1Vals = factory.get.values(factory.convert.rgb(c1), RETURN_TYPE.ARRAY);
+			var c2Vals = factory.get.values(factory.convert.rgb(c2), RETURN_TYPE.ARRAY);
+			var clrs = [];
+			for (var i = 0; i < c1Vals.length; i++) {
+				clrs.push(factory.get.randomNumber(c1Vals[i], c2Vals[i], 0));
+			}
+			var rgbClr = 'RGB(' + clrs[0] + ',' + clrs[1] + ',' + clrs[2] + ')';
+			return factory.convert.hsl(rgbClr);
 		}
-		function randomBetweenHsla() {
-
+		function randomBetweenHsla(c1, c2, o1, o2) {
+			var c1Vals = factory.get.values(factory.convert.rgba(c1,o1), RETURN_TYPE.ARRAY);
+			var c2Vals = factory.get.values(factory.convert.rgba(c2,o2), RETURN_TYPE.ARRAY);
+			var clrs = [];
+			for (var i = 0; i < c1Vals.length; i++) {
+				clrs.push(factory.get.randomNumber(c1Vals[i], c2Vals[i], i === 3 ? 2 : 0));
+			}
+			var rgbaClr = 'RGBA(' + clrs[0] + ',' + clrs[1] + ',' + clrs[2] + ',' + clrs[3] + ')';
+			return factory.convert.hsla(rgbaClr);
 		}
-
     }
