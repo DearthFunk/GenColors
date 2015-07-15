@@ -1,6 +1,0 @@
-{
-	"browserStack": {
-		"username": "USER_NAME",
-		"accessKey": "ACCESS_KEY"
-	}
-}
