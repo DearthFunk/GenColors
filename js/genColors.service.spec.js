@@ -240,9 +240,41 @@ describe('GenColors service', function(){
 	});
 
 	//ARRAY.HEX
+	it('.array.hex should return an array of hex values between the colors provided', function(){
+	});
+	it('.array.hex should return an array of 2 values with the colors provided', function(){
+	});
+
 	//ARRAY.RGB
+	it('.array.rgb should return an array of rgb values between the colors provided', function(){
+	});
+	it('.array.rgb should return an array of 2 values with the colors provided', function(){
+	});
+
 	//ARRAY.RGBA
+	it('.array.rgb should return an array of rgb values between the colors provided', function(){
+	});
+	it('.array.rgb should return an array of rgb values between the colors/opacities provided', function(){
+	});
+	it('.array.rgb should return an array of 2 values with the colors provided', function(){
+	});
+	it('.array.rgb should return an array of 2 values with the colors/opacities provided', function(){
+	});
+
 	//ARRAY.HSL
+	it('.array.hsl should return an array of hsl values between the colors provided', function(){
+	});
+	it('.array.hsl should return an array of 2 values with the colors provided', function(){
+	});
+
 	//ARRAY.HSLA
+	it('.array.hsla should return an array of hsla values between the colors provided', function(){
+	});
+	it('.array.hsla should return an array of hsla values between the colors/opacities provided', function(){
+	});
+	it('.array.hsla should return an array of 2 values with the colors provided', function(){
+	});
+	it('.array.hsla should return an array of 2 values with the colors/opacities provided', function(){
+	});
 
 });
