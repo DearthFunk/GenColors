@@ -27,31 +27,29 @@
 
     <!--LIBRARIES------------------------------------------------------------------------------------------------------>
         <script type="text/javascript" src="lib/angular.js"></script>
-        <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
         <script type="text/javascript" src="lib/zeroClipboard/ZeroClipboard.js"></script>
 
     <!--MAIN----------------------------------------------------------------------------------------------------------->
-        <link rel="stylesheet" href="css/main.css">
-        <script type="text/javascript" src="js/clrService.js"></script>
-        <script type="text/javascript" src="js/eventService.js"></script>
-        <script type="text/javascript" src="js/controller.js"></script>
+        <script type="text/javascript" src="js/genColors.service.js"></script>
+        <script type="text/javascript" src="app/app.controller.js"></script>
 
     <!--EDITOR--------------------------------------------------------------------------------------------------------->
-        <script type="text/javascript" src="editor/editor.js"></script>
-        <link rel="stylesheet" href="editor/editor.css">
-        <script type="text/javascript" src="editor/randomDemo/random.js"></script>
-        <link rel="stylesheet" href="editor/randomDemo/random.css">
-        <script type="text/javascript" src="editor/convertDemo/convert.js"></script>
-        <link rel="stylesheet" href="editor/convertDemo/convert.css">
-        <script type="text/javascript" src="editor/betweenDemo/between.js"></script>
-        <link rel="stylesheet" href="editor/betweenDemo/between.css">
-        <script type="text/javascript" src="editor/arrayDemo/array.js"></script>
-        <link rel="stylesheet" href="editor/arrayDemo/array.css">
+        <script type="text/javascript" src="editor/editor.directive.js"></script>
+		<script type="text/javascript" src="editor/htmlDirective/html.directive.js"></script>
+        <script type="text/javascript" src="editor/random/random.directive.js"></script>
+        <script type="text/javascript" src="editor/randomBetween/randomBetween.directive.js"></script>
+        <script type="text/javascript" src="editor/convert/convert.directive.js"></script>
+        <script type="text/javascript" src="editor/between/between.directive.js"></script>
+        <script type="text/javascript" src="editor/array/array.directive.js"></script>
+
+	<!-- STYLES -->
+		<link rel="stylesheet/less" href="app/app.less">
+		<script type="text/javascript" src="lib/less.js"></script>
 
 </head>
 
-<body data-ng-style="{backgroundColor: getBackground()}">
-    <div class="editor"></div>
+<body data-ng-controller="genColorsController" data-ng-style="{backgroundColor: getBackground()}">
+    <div editor></div>
     <div class="arrayBackground" data-ng-if="arrayBackground">
         <div class="slice" data-ng-repeat="item in background.color track by $index" data-ng-style="{backgroundColor:item, width:sliceWidth+'px'}"></div>
     </div>

@@ -1,0 +1,47 @@
+{
+	"basePath": "",
+	"frameworks": ["jasmine"],
+	"preprocessors": {
+		"../**/*.html": ["ng-html2js"],
+		"../**/!(*.spec|*.unit|*.mock).js": ["coverage"]
+	},
+
+	"files": [
+		"../lib/angular.js",
+
+		"karmaTest.unit.js"
+
+	],
+	"ngHtml2JsPreprocessor": {
+		"moduleName": "templates"
+	},
+	"exclude": [
+		"../lib/zeroclipboard/**/*",
+		"../lib/less.js"
+	],
+	"reporters": ["progress"],
+	"port": 9876,
+	"colors": true,
+	"autoWatch": true,
+	"singleRun": false,
+	"customLaunchers": {
+		"local": {},
+		"browserStack": {
+			"IE10": {
+				"base": "IE",
+				"x-ua-compatible": "IE=EmulateIE10"
+			},
+			"IE9": {
+				"base": "IE",
+				"x-ua-compatible": "IE=EmulateIE9"
+			},
+			"bs_firefox_mac": {
+				"base": "BrowserStack",
+				"browser": "firefox",
+				"browser_version": "21.0",
+				"os": "OS X",
+				"os_version": "Mountain Lion"
+			}
+		}
+	}
+}
