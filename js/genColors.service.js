@@ -23,22 +23,21 @@ angular
 		        colorType: getColorType,
 		        values: getValues,
 		        randomNumber: getRandomNumber,
-		        roundedNumber: getRoundedNumber,
-		        hue: getHue
+		        roundedNumber: getRoundedNumber
 	        },
 	        random: {
 		        hex: randomHex,
 		        rgb: randomRgb,
 		        rgba: randomRgba,
 		        hsl: randomHsl,
-		        hsla: randomHsla,
-		        between: {
-			        hex: randomBetweenHex,
-			        rgb: randomBetweenRgb,
-			        rgba: randomBetweenRgba,
-			        hsl: randomBetweenHsl,
-			        hsla: randomBetweenHsla
-		        }
+		        hsla: randomHsla
+	        },
+	        randomBetween: {
+		        hex: randomBetweenHex,
+		        rgb: randomBetweenRgb,
+		        rgba: randomBetweenRgba,
+		        hsl: randomBetweenHsl,
+		        hsla: randomBetweenHsla
 	        },
 	        convert: {
 		        numberToHex: convertNumberToHex,
@@ -134,23 +133,6 @@ angular
 			var padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
 			return parseFloat(precision ? integral + '.' +  padding + fraction : integral);
 		}
-		function getHue(m1, m2, hue, numOrHex) {
-	        var v;
-	        if (hue < 0)
-		        hue += 1;
-	        else if (hue > 1)
-		        hue -= 1;
-
-	        if (6 * hue < 1)
-		        v = m1 + (m2 - m1) * hue * 6;
-	        else if (2 * hue < 1)
-		        v = m2;
-	        else if (3 * hue < 2)
-		        v = m1 + (m2 - m1) * (2/3 - hue) * 6;
-	        else
-		        v = m1;
-	        return numOrHex ? factory.convert.numberToHex(255 * v) : factory.get.roundedNumber(255 * v,0);
-        }
 		function randomHex(type, greyScale) {
 			var returnVal;
 			if (greyScale) {
@@ -497,4 +479,4 @@ angular
 			var rgbaClr = 'RGBA(' + clrs[0] + ',' + clrs[1] + ',' + clrs[2] + ',' + clrs[3] + ')';
 			return factory.convert.hsla(rgbaClr);
 		}
-    }
+   }
