@@ -1,5 +1,5 @@
 # GenColors
-GenColors is an angular service you can plug into your angular application to help with color conversion, generation, etc.. Currently HEX, RGB, RGBA, HSL, and HSLA color formats are supported.
+GenColors is an angular service you can plug into your angular application to help with color conversion, generation, etc.. Currently HEX, RGB, RGBA, HSL, and HSLA color formats are supported. To use genColors, simply <a href="/blob/master/js/genColors.service.js">download the genColors.service.js file</a> and include "genColors" in your main angular app. The unit tests for the service are located in the same directory. All other fils in the repo are for the actual demo of the services functions.
 
 ##TODO'S##
 1) complete unit tests<br>
