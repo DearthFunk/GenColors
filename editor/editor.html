@@ -2,10 +2,7 @@
     <div class="header" data-ng-mousedown="moveModule($event)">DEMO</div>
 
     <div class="topContainer">
-        <div id="copyButton" class="copyButton" data-clipboard-text="{{background.color}}">
-            <div class="copyText">COPY</div>
-            {{background.color}}
-        </div>
+	    <textarea data-ng-model="background.color"></textarea>
     </div>
 
     <div class="editorBody">

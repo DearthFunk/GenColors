@@ -20,8 +20,6 @@ function editorController($scope, $element, $window, genColors) {
 	var boundingRect = $element[0].getBoundingClientRect ();
 	var startX, startY, moving, windowSize, right, bottom;
 
-	new ZeroClipboard (document.getElementById ('copyButton'));
-
 	$scope.activeControls = -1;
 	$scope.left = windowPadding;
 	$scope.top = windowPadding;
