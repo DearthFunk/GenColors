@@ -3,34 +3,34 @@ GenColors is an angular service you can plug into your angular application to he
 <br><br>
 Live Demo: <a href="http://dearthfunk.github.io/GenColors/" target="_new">http://dearthfunk.github.io/GenColors/</a>
 <br>
-##TODO'S##
+## TODO'S ##
 1) complete unit tests<br>
 2) some general error checking in the functions (ie. functions requires 2 colors, but you pass in one)<br>
 3) add CMYK support<br>
 
-##CURRENT FUNCTIONS##
+## CURRENT FUNCTIONS ##
 
-###GET###
+### GET ###
 get.colorType:<br>
 get.values:<br>
 get.randomNumber:<br>
 get.roundedNumber:<br>
 
-###RANDOM###
+### RANDOM ###
 random.hex:<br>
 random.rgb:<br>
 random.rgba:<br>
 random.hsl:<br>
 random.hsla:<br>
 
-###RANDOMBETWEEN###
+### RANDOMBETWEEN ###
 randomBetween.hex:<br>
 randomBetween.rgb:<br>
 randomBetween.rgba:<br>
 randomBetween.hsl:<br>
 randomBetween.hsla:<br>
 
-###CONVERT###
+### CONVERT ###
 convert.numberToHex:<br>
 convert.hexToNumber:<br>
 convert.hex:<br>
@@ -39,14 +39,14 @@ convert.rgba:<br>
 convert.hsl:<br>
 convert.hsla:<br>
 
-###BETWEEN###
+### BETWEEN ###
 between.hex:<br>
 between.rgb:<br>
 between.rgba:<br>
 between.hsl:<br>
 between.hsla:<br>
 
-###ARRAY###
+### ARRAY ###
 array.hex:<br>
 array.rgb:<br>
 array.rgba:<br>
